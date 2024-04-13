@@ -29,7 +29,8 @@
   border: 1px solid #4e75ff;
 }
 
-.search-btn {
+.search-btn,
+.load-more {
   border-radius: 8px;
   border: none;
   padding: 8px 16px;
@@ -42,8 +43,19 @@
   background: #4e75ff;
 }
 
-.search-btn:hover {
+.search-btn:hover,
+.load-more:hover {
   background: #6c8cff;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.load-more-hidden {
+  display: none;
 }
 
 .gallery {

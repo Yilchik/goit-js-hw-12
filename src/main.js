@@ -84,9 +84,6 @@ async function loadMore() {
 
     gallery.insertAdjacentHTML('beforeend', createGallery(data.hits));
     page += 1;
-    // if (page < 500) {
-    //   loadBtn.classList.replace('load-more-hidden', 'load-more');
-    // }
 
     loadBtn.disabled = false;
     console.log(page);

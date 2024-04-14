@@ -19,6 +19,7 @@ function searchImages(event) {
   event.preventDefault();
   gallery.innerHTML = '';
   const query = event.currentTarget.elements.search.value.trim();
+  page = 1;
 
   if (query === '') {
     return iziToast.error({
@@ -44,8 +45,10 @@ function searchImages(event) {
       searchForm.reset();
       gallery.insertAdjacentHTML('beforeend', createGallery(data.hits));
       lightbox.refresh();
-      if (data.page < 500) {
-        selectors.loadBtn.classList.replace('load-more-hidden', 'load-more');
+      console.log(page);
+      if (page < 500) {
+        loadBtn.classList.replace('load-more-hidden', 'load-more');
+        loadMore();
       }
     })
     .catch(error => {
@@ -85,18 +88,19 @@ async function loadMore() {
     const item = document.querySelector('.gallery-item');
     const itemHeight = item.getBoundingClientRect().height;
 
-    console.log(item.getBoundingClientRect().height);
-    window.scrollBy({
-      left: 0,
-      top: cardHeight * 2,
-      behavior: 'smooth',
-    });
-    if (data.page < 500) {
-      loadBtn.classList.replace('load-more-hidden', 'load-more');
-    }
-    if (data.page >= 500) {
-      loadBtn.classList.replace('load-more', 'load-more-hidden');
-    }
+    // window.scrollBy({
+    //   left: 0,
+    //   top: cardHeight * 2,
+    //   behavior: 'smooth',
+    // });
+
+    // if (data.page < 500) {
+    //   loadBtn.classList.replace('load-more-hidden', 'load-more');
+    // }
+
+    // if (data.page >= 500) {
+    //   loadBtn.classList.replace('load-more', 'load-more-hidden');
+    // }
   } catch (error) {
     alert(error.message);
   }

@@ -3,9 +3,7 @@ const BASE_URL = 'https://pixabay.com/api/';
 
 import axios from 'axios';
 
-let page = 1;
-
-export async function fetchImages(text) {
+export async function fetchImages(text, page) {
   const response = await axios(BASE_URL, {
     params: {
       key: API_KEY,
@@ -14,7 +12,7 @@ export async function fetchImages(text) {
       orientation: 'horizontal',
       safesearch: 'true',
       page,
-      per_page: 12,
+      per_page: 15,
     },
   });
   return response.data;

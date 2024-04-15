@@ -83,7 +83,7 @@ async function loadMore() {
   try {
     const text = sessionStorage.getItem('text');
     const data = await fetchImages(query, page);
-
+    showLoading(loader);
     gallery.insertAdjacentHTML('beforeend', createGallery(data.hits));
     page += 1;
 
@@ -101,8 +101,8 @@ async function loadMore() {
 
     if (page >= allPages) {
       loadBtn.classList.replace('load-more', 'load-more-hidden');
-      return iziToast.error({
-        title: 'Error',
+      return iziToast.info({
+        title: 'Info',
         message: `"We're sorry, but you've reached the end of search results."`,
         position: 'topRight',
       });
@@ -113,6 +113,8 @@ async function loadMore() {
       message: `"555Sorry, there are no images matching your search query. Please try again!"`,
       position: 'topRight',
     });
+  } finally {
+    hideLoading(loader);
   }
 }
 

@@ -15,7 +15,7 @@ const loader = document.querySelector('.loading-indicator');
 
 let page = 1;
 let query;
-let allPage = 0;
+let allPages = 0;
 
 searchForm.addEventListener('submit', searchImages);
 
@@ -54,9 +54,9 @@ async function searchImages(event) {
       gallery.insertAdjacentHTML('beforeend', createGallery(data.hits));
       lightbox.refresh();
 
-      allPage = Math.ceil(data.totalHits / 15);
-
-      if (page < allPage) {
+      allPages = Math.ceil(data.totalHits / data.hits.length);
+      console.log(allPages);
+      if (page < allPages) {
         loadBtn.classList.replace('load-more-hidden', 'load-more');
       }
     })
@@ -99,9 +99,7 @@ async function loadMore() {
       behavior: 'smooth',
     });
 
-    allPage = Math.ceil(data.totalHits / 15);
-
-    if (page >= allPage) {
+    if (page >= allPages) {
       loadBtn.classList.replace('load-more', 'load-more-hidden');
       return iziToast.error({
         title: 'Error',

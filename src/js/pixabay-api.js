@@ -12,7 +12,7 @@ export async function fetchImages(text, page) {
       orientation: 'horizontal',
       safesearch: 'true',
       page,
-      per_page: 15,
+      per_page: 150,
     },
   });
   return response.data;

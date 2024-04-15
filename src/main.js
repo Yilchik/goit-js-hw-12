@@ -51,14 +51,12 @@ async function searchImages(event) {
       searchForm.reset();
       gallery.insertAdjacentHTML('beforeend', createGallery(data.hits));
       lightbox.refresh();
-      if (page < 500) {
+
+      if (page < data.totalHits) {
         loadBtn.classList.replace('load-more-hidden', 'load-more');
       }
-
-      if (page >= 500) {
-        loadBtn.classList.replace('load-more', 'load-more-hidden');
-      }
     })
+
     .catch(error => {
       searchForm.reset();
       iziToast.error({
@@ -87,16 +85,30 @@ async function loadMore() {
 
     loadBtn.disabled = false;
     console.log(page);
-    console.log(data);
+
     const item = document.querySelector('.gallery-item');
     const itemHeight = item.getBoundingClientRect().height;
+
     window.scrollBy({
       left: 0,
       top: itemHeight * 2,
       behavior: 'smooth',
     });
+
+    if (page >= data.totalHits) {
+      loadBtn.classList.replace('load-more', 'load-more-hidden');
+      return iziToast.error({
+        title: 'Error',
+        message: `"We're sorry, but you've reached the end of search results."`,
+        position: 'topRight',
+      });
+    }
   } catch (error) {
-    alert(error.message);
+    iziToast.error({
+      title: 'Error',
+      message: `"555Sorry, there are no images matching your search query. Please try again!"`,
+      position: 'topRight',
+    });
   }
 }
 

@@ -14,13 +14,15 @@ const searchForm = document.querySelector('.search-form');
 const loader = document.querySelector('.loading-indicator');
 
 let page = 1;
+let query;
+let allPage = 0;
 
 searchForm.addEventListener('submit', searchImages);
 
 async function searchImages(event) {
   event.preventDefault();
   gallery.innerHTML = '';
-  const query = event.currentTarget.elements.search.value.trim();
+  query = event.currentTarget.elements.search.value.trim();
   sessionStorage.setItem('text', query);
   page = 1;
 
@@ -52,7 +54,9 @@ async function searchImages(event) {
       gallery.insertAdjacentHTML('beforeend', createGallery(data.hits));
       lightbox.refresh();
 
-      if (page < data.totalHits) {
+      allPage = Math.ceil(data.totalHits / 15);
+
+      if (page < allPage) {
         loadBtn.classList.replace('load-more-hidden', 'load-more');
       }
     })
@@ -78,7 +82,7 @@ async function loadMore() {
 
   try {
     const text = sessionStorage.getItem('text');
-    const data = await fetchImages(text, page);
+    const data = await fetchImages(query, page);
 
     gallery.insertAdjacentHTML('beforeend', createGallery(data.hits));
     page += 1;
@@ -95,7 +99,9 @@ async function loadMore() {
       behavior: 'smooth',
     });
 
-    if (page >= data.totalHits) {
+    allPage = Math.ceil(data.totalHits / 15);
+
+    if (page >= allPage) {
       loadBtn.classList.replace('load-more', 'load-more-hidden');
       return iziToast.error({
         title: 'Error',

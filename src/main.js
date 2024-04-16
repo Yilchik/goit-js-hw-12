@@ -31,7 +31,7 @@ async function searchImages(event) {
     return iziToast.error({
       title: 'Error',
       message: 'Please enter a search images',
-      position: 'topRight',
+      position: 'topCenter',
     });
   }
 
@@ -46,7 +46,7 @@ async function searchImages(event) {
           title: 'Error',
           message:
             '"Sorry, there are no images matching your search query. Please try again!"',
-          position: 'topRight',
+          position: 'topCenter',
         });
       }
 
@@ -66,7 +66,7 @@ async function searchImages(event) {
       iziToast.error({
         title: 'Error',
         message: `"222Sorry, there are no images matching your search query. Please try again!"`,
-        position: 'topRight',
+        position: 'topCenter',
       });
     })
     .finally(() => {
@@ -104,14 +104,14 @@ async function loadMore() {
       return iziToast.info({
         title: 'Info',
         message: `"We're sorry, but you've reached the end of search results."`,
-        position: 'topRight',
+        position: 'topCenter',
       });
     }
   } catch (error) {
     iziToast.error({
       title: 'Error',
       message: `"555Sorry, there are no images matching your search query. Please try again!"`,
-      position: 'topRight',
+      position: 'topCenter',
     });
   } finally {
     hideLoading(loader);

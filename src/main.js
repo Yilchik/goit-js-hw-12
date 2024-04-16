@@ -85,6 +85,7 @@ async function loadMore() {
     const data = await fetchImages(query, page);
     showLoading(loader);
     gallery.insertAdjacentHTML('beforeend', createGallery(data.hits));
+    lightbox.refresh();
     page += 1;
 
     loadBtn.disabled = false;

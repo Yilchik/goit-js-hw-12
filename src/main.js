@@ -23,7 +23,7 @@ async function searchImages(event) {
   event.preventDefault();
   gallery.innerHTML = '';
   query = event.currentTarget.elements.search.value.trim();
-  sessionStorage.setItem('text', query);
+
   page = 1;
 
   if (query === '') {
@@ -55,7 +55,7 @@ async function searchImages(event) {
       lightbox.refresh();
 
       allPages = Math.ceil(data.totalHits / data.hits.length);
-      console.log(allPages);
+
       if (page < allPages) {
         loadBtn.classList.replace('load-more-hidden', 'load-more');
       }
@@ -65,7 +65,7 @@ async function searchImages(event) {
       searchForm.reset();
       iziToast.error({
         title: 'Error',
-        message: `"222Sorry, there are no images matching your search query. Please try again!"`,
+        message: `"Sorry, there are no images matching your search query. Please try again!"`,
         position: 'topCenter',
       });
     })
@@ -81,7 +81,6 @@ async function loadMore() {
   loadBtn.disabled = true;
 
   try {
-    const text = sessionStorage.getItem('text');
     const data = await fetchImages(query, page);
     showLoading(loader);
     gallery.insertAdjacentHTML('beforeend', createGallery(data.hits));
@@ -111,7 +110,7 @@ async function loadMore() {
   } catch (error) {
     iziToast.error({
       title: 'Error',
-      message: `"555Sorry, there are no images matching your search query. Please try again!"`,
+      message: `"Sorry, there are no images matching your search query. Please try again!"`,
       position: 'topCenter',
     });
   } finally {

@@ -22,6 +22,7 @@ searchForm.addEventListener('submit', searchImages);
 async function searchImages(event) {
   event.preventDefault();
   gallery.innerHTML = '';
+  loadBtn.classList.replace('load-more', 'load-more-hidden');
   query = event.currentTarget.elements.search.value.trim();
 
   page = 1;
@@ -69,6 +70,7 @@ async function searchImages(event) {
         position: 'topCenter',
       });
     })
+
     .finally(() => {
       hideLoading(loader);
     });

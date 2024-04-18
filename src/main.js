@@ -43,6 +43,7 @@ async function searchImages(event) {
       console.log(data);
       if (data.hits.length === 0) {
         searchForm.reset();
+        loadBtn.classList.replace('load-more', 'load-more-hidden');
         return iziToast.error({
           title: 'Error',
           message:
